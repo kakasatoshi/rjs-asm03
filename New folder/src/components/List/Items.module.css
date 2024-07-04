@@ -1,0 +1,50 @@
+/* Items.module.css */
+
+.content {
+  padding: 20px;
+  text-align: center;
+  width: 21.5%;
+  background-color: #F4F5F9;
+  animation: fadeIn 1s ease-in-out; /* Animation cho content */
+}
+
+.img img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out; /* Transition cho hình ảnh */
+}
+
+.img img:hover {
+  transform: scale(1.1); /* Hiệu ứng phóng to khi hover */
+}
+
+.name {
+  font-size: 1.2em;
+  margin: 10px 0;
+  transition: font-size 0.3s ease-in-out; /* Transition cho tên sản phẩm */
+}
+
+.name:hover {
+  font-size: 1.3em; /* Hiệu ứng tăng kích thước chữ khi hover */
+}
+
+.price {
+  color: #888;
+  transition: color 0.3s ease-in-out; /* Transition cho giá sản phẩm */
+}
+
+.price:hover {
+  color: #555; /* Hiệu ứng đổi màu khi hover */
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(10px); /* Bắt đầu từ dưới lên */
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0); /* Về vị trí ban đầu */
+  }
+}

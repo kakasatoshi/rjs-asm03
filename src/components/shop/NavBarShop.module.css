@@ -1,0 +1,39 @@
+.content{
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    background-color: rgb(255,255,255);
+    
+   
+    
+}
+.name{
+    background-color: black;
+    color: thistle;
+}
+.kink{
+    
+    background-color: rgb(147, 147, 147);
+    color: rgb(30, 30, 30);
+}
+.item{
+    border-radius: 2px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    height: 30px;
+    align-items: center;
+
+     display: flex; /* Sử dụng flexbox */
+    /* align-items: center;  Căn giữa theo chiều dọc */
+     /* justify-content: center; Căn giữa theo chiều ngang */
+     /* padding: 10px;  */
+     text-align: center; /* Căn giữa chữ trong button */
+    
+}
+
+.btn {
+    border: none; /* Bỏ khung cho button */
+    background: none; /* Nếu muốn bỏ nền mặc định */
+    cursor: pointer; /* Thêm con trỏ chỉ tay */
+    /* Thêm các style khác nếu cần */
+}
