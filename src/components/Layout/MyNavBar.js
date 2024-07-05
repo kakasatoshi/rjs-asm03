@@ -3,8 +3,11 @@ import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faUser } from "@fortawesome/free-solid-svg-icons";
 import "./Navbar.css";
+import { useSelector } from "react-redux";
 
 const MyNavbar = () => {
+  const login = useSelector((state) => state.auth.login);
+  // const u
   return (
     <nav className="navbar">
       <div className="navbar-left">

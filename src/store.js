@@ -1,10 +1,6 @@
-// import React from "react";
 import { configureStore, createSlice } from "@reduxjs/toolkit";
-import useProducts from "./http/useProduct";
-import { useState } from "react";
 
-// const [products, isLoad, error] = useProducts();
-
+// Initial states
 const initialState = {
   show: false,
   logIn: false,
@@ -15,9 +11,18 @@ const initialState = {
   error: null,
 };
 
+const initialStateAuth = {
+  show: false,
+  logIn: false,
+  signUp: false,
+  arrUser: [],
+  user: "",
+};
+
+// Slices
 const showSlice = createSlice({
   name: "show",
-  initialState: initialState,
+  initialState,
   reducers: {
     SHOW_POPUP(state) {
       state.show = true;
@@ -25,42 +30,52 @@ const showSlice = createSlice({
     HIDE_POPUP(state) {
       state.show = false;
     },
+    LoadProductData(state, actions) {
+      state.productData = actions.payload;
+    },
+    UpDateProduct(state, actions) {
+      state.productData = actions.payload;
+    },
+    setIsLoad(state, actions) {
+      state.isLoad = actions.payload;
+    },
+    setError(state, actions) {
+      state.error = actions.payload;
+    },
+    upDateCart(state, actions) {
+      state.cart = [...state.cart, actions.payload];
+    },
+  },
+});
+
+const authSlice = createSlice({
+  name: "auth",
+  initialState: initialStateAuth,
+  reducers: {
     login(state) {
       state.logIn = !state.logIn;
     },
     signUp(state) {
       state.signUp = !state.signUp;
     },
-    LoadProductData(state, actions) {
-      state.productData = [];
-      actions.payload.forEach((element) => {
-        state.productData.push(element);
-      });
+    LoadUser(state, actions) {
+      state.arrUser = [...state.arrUser, actions.payload];
     },
-    UpDateProduct(state, actions) {
-      state.productData = [];
-      actions.payload.forEach((element) => {
-        state.productData.push(element);
-      });
-    },
-    isLoad(state, actions) {
-      state.isLoad = actions.payload;
-    },
-    error(state, actions) {
-      state.error = actions.payload;
-    },
-    upDateCart(state, actions) {
-      state.cart = [...state.cart, actions.payload];
-      // state.cart.push(account);
+    setUser(state, actions) {
+      state.user = actions.payload;
     },
   },
 });
 
-// const store = createSlice(showSlice.reducer);
+// Configure store
 const store = configureStore({
-  reducer: { show: showSlice.reducer },
+  reducer: {
+    show: showSlice.reducer,
+    auth: authSlice.reducer,
+  },
 });
 
 export const showAction = showSlice.actions;
+export const authAction = authSlice.actions;
 
 export default store;
