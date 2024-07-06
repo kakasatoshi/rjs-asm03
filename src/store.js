@@ -11,14 +11,6 @@ const initialState = {
   error: null,
 };
 
-const initialStateAuth = {
-  show: false,
-  logIn: false,
-  signUp: false,
-  arrUser: [],
-  user: "",
-};
-
 // Slices
 const showSlice = createSlice({
   name: "show",
@@ -47,6 +39,14 @@ const showSlice = createSlice({
     },
   },
 });
+/////////////////////////Auth/////////////////////////
+
+const initialStateAuth = {
+  show: false,
+  logIn: false,
+  arrUser: [],
+  user: "",
+};
 
 const authSlice = createSlice({
   name: "auth",
@@ -55,8 +55,34 @@ const authSlice = createSlice({
     login(state) {
       state.logIn = !state.logIn;
     },
-    signUp(state) {
-      state.signUp = !state.signUp;
+    logOut(state) {
+      state.logIn = !state.logIn;
+    },
+    LoadUser(state, actions) {
+      state.arrUser = [...state.arrUser, actions.payload];
+    },
+    setUser(state, actions) {
+      state.user = actions.payload;
+    },
+  },
+});
+///////////////////////////////////cart///////////////////////////////
+const initialStateCart = {
+  show: false,
+  logIn: false,
+  arrUser: [],
+  user: "",
+};
+
+const cartSlice = createSlice({
+  name: "auth",
+  initialState: initialStateCart,
+  reducers: {
+    login(state) {
+      state.logIn = !state.logIn;
+    },
+    logOut(state) {
+      state.logIn = !state.logIn;
     },
     LoadUser(state, actions) {
       state.arrUser = [...state.arrUser, actions.payload];
@@ -72,10 +98,12 @@ const store = configureStore({
   reducer: {
     show: showSlice.reducer,
     auth: authSlice.reducer,
+    cart: cartSlice.reducer,
   },
 });
 
 export const showAction = showSlice.actions;
 export const authAction = authSlice.actions;
+export const cartAction = authSlice.actions;
 
 export default store;

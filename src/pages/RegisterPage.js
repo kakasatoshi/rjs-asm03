@@ -23,7 +23,7 @@ const RegisterPage = () => {
       return "Email already exists.";
     }
 
-    if (password.length <= 8) {
+    if (password.length < 8) {
       return "Password must be longer than 8 characters.";
     }
 

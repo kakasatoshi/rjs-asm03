@@ -27,7 +27,7 @@ const LoginPage = () => {
     if (user) {
       dispatch(authAction.login());
       dispatch(authAction.LoadUser(user));
-      dispatch(authAction.setUserUser(email));
+      dispatch(authAction.setUser(user.fullName));
 
       localStorage.setItem("currentUser", JSON.stringify(user));
       navigate("/");
