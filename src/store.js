@@ -68,9 +68,7 @@ const authSlice = createSlice({
 });
 ///////////////////////////////////cart///////////////////////////////
 const initialStateCart = {
-  show: false,
-  logIn: false,
-  arrUser: [],
+  listCart: [],
   user: "",
 };
 
@@ -78,17 +76,36 @@ const cartSlice = createSlice({
   name: "auth",
   initialState: initialStateCart,
   reducers: {
-    login(state) {
-      state.logIn = !state.logIn;
+    ADD_CART(state, actions) {
+      const existingProduct = state.listCart.find(
+        (item) => item.id === actions.payload.id
+      );
+      if (existingProduct) {
+        existingProduct.quantity += actions.payload.quantity;
+        return {
+          ...state,
+          listCart: [...state.listCart],
+        };
+      } else {
+        return {
+          ...state,
+          listCart: [...state.listCart, actions.payload],
+        };
+      }
     },
-    logOut(state) {
-      state.logIn = !state.logIn;
+    UPDATE_CART(state, actions) {
+      return {
+        ...state,
+        listCart: state.listCart.map((item) =>
+          item.id === actions.payload.id ? actions.payload : item
+        ),
+      };
     },
-    LoadUser(state, actions) {
-      state.arrUser = [...state.arrUser, actions.payload];
-    },
-    setUser(state, actions) {
-      state.user = actions.payload;
+    DELETE_CART(state, actions) {
+      return {
+        ...state,
+        listCart: state.listCart.filter((item) => item.id !== actions.payload),
+      };
     },
   },
 });

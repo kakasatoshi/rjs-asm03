@@ -32,7 +32,7 @@ const ShopPage = () => {
   return (
     <div className={css.content}>
       <div className={css.banner}>
-        <BannerShop />
+        <BannerShop text="SHOP"/>
       </div>
       <div className={css.main}>
         <div className={css.left}>
