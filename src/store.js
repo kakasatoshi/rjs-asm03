@@ -73,24 +73,22 @@ const initialStateCart = {
 };
 
 const cartSlice = createSlice({
-  name: "auth",
+  name: "cart",
   initialState: initialStateCart,
   reducers: {
     ADD_CART(state, actions) {
-      const existingProduct = state.listCart.find(
-        (item) => item.id === actions.payload.id
+      const existingProductIndex = state.listCart.findIndex(
+        (item) => item.product._id.$oid === actions.payload.product._id.$oid
       );
-      if (existingProduct) {
-        existingProduct.quantity += actions.payload.quantity;
-        return {
-          ...state,
-          listCart: [...state.listCart],
+      if (existingProductIndex !== -1) {
+        state.listCart[existingProductIndex] = {
+          ...state.listCart[existingProductIndex],
+          quantity:
+            state.listCart[existingProductIndex].quantity +
+            actions.payload.quantity,
         };
       } else {
-        return {
-          ...state,
-          listCart: [...state.listCart, actions.payload],
-        };
+        state.listCart = [...state.listCart, actions.payload];
       }
     },
     UPDATE_CART(state, actions) {
@@ -121,6 +119,6 @@ const store = configureStore({
 
 export const showAction = showSlice.actions;
 export const authAction = authSlice.actions;
-export const cartAction = authSlice.actions;
+export const cartAction = cartSlice.actions;
 
 export default store;

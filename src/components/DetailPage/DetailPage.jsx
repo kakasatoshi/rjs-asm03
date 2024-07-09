@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import ItemProduct from "../List/ItemProduct";
 import { useDispatch, useSelector } from "react-redux";
-import { showAction } from "../../store";
+import { cartAction } from "../../store";
 
 const DetailPage = () => {
   const { id } = useParams();
@@ -21,6 +21,9 @@ const DetailPage = () => {
   const [quantity,setQuantity]=useState(quantityData||1);
   // const arrQuantity=(useSelector(state=>state.show.cart)).filter((e)=>e.id===id).quantity;
 
+  const listCart = useSelector((state) => state.cart.listCart);
+
+  console.log(listCart,"listcart"); // In ra console để kiểm tra
 
   if (product.length === 0) {
     return <div>Product not found</div>;
@@ -30,10 +33,10 @@ const DetailPage = () => {
 
   const onClickHanle=()=>{
     const data={
-      id:product[0]._id.$oid,
+      product:product[0],
       quantity:quantity,
     };
-    dispatch(showAction.upDateCart(data));
+    dispatch(cartAction.ADD_CART(data));
   };
 
   return (
