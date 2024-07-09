@@ -1,4 +1,5 @@
 import React from "react";
+import CartItem from "./CartItem";
 
 const cart = () => {
   return (
@@ -14,6 +15,7 @@ const cart = () => {
         <div className="mr-4 ml-4">REMOVE</div>
       </div>
       </div>
+      <CartItem />
     </div>
   );
 };

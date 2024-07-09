@@ -138,7 +138,7 @@ const DetailPage = () => {
             className="col-lg-8 mb-4"
             dangerouslySetInnerHTML={{ __html: formattedText }}
           ></div>
-          <div className="col-lg-4444">
+          <div className="col-lg-4">
           <h4 className="card-title">RELATED PRODUCT</h4>
               <div className="d-flex column ">
                 {categoryData.map((item, idx) => (
