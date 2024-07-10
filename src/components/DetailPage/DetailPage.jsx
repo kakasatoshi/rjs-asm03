@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import ItemProduct from "../List/ItemProduct";
 import { useDispatch, useSelector } from "react-redux";
-import { cartAction } from "../../store";
+import { cartAction, showAction } from "../../store";
 
 const DetailPage = () => {
   const { id } = useParams();
@@ -22,6 +22,8 @@ const DetailPage = () => {
   // const arrQuantity=(useSelector(state=>state.show.cart)).filter((e)=>e.id===id).quantity;
 
   const listCart = useSelector((state) => state.cart.listCart);
+  // const listCart = useSelector((state) => state.show.listCart);
+
 
   console.log(listCart,"listcart"); // In ra console để kiểm tra
 
@@ -31,12 +33,13 @@ const DetailPage = () => {
   const text = product[0].long_desc;
   const formattedText = text.replace(/\n\n/g, "<br />");
 
-  const onClickHanle=()=>{
+  const onClickHandle=()=>{
     const data={
       product:product[0],
       quantity:quantity,
     };
     dispatch(cartAction.ADD_CART(data));
+    // dispatch(showAction.upDateCart(data));
   };
 
   return (
@@ -117,7 +120,7 @@ const DetailPage = () => {
                     <button className={`btn ${css.faCaret}`} onClick={()=>setQuantity(quantity+1)}>
                       <FontAwesomeIcon icon={faCaretRight} />
                     </button>
-                    <a href="#" className={`btn shadow-0 bg-dark text-white`} onClick={onClickHanle}>
+                    <a href="#" className={`btn shadow-0 bg-dark text-white`} onClick={onClickHandle}>
                       Add to cart
                     </a>
                   </div>

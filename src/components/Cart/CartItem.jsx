@@ -1,6 +1,7 @@
 import React from "react";
 import useProduct from "../../http/useProduct";
 import formatPrice from "../Layout/formatPrice";
+import css from "./CartItem.module.css"
 
 const CartItem = () => {
   const { products, isLoad, err } = useProduct();
@@ -23,7 +24,7 @@ const CartItem = () => {
     <div>
       <div className="">
         <div className="row">
-          <div className="col-2 mr-4 ml-4"><img src={product.img1} alt='sanpham' /></div>
+          <div className={`col-2 mr-4 ml-4 ${css.img}`}><img src={product.img1} alt='sanpham' /></div>
           <div className="col-2 mr-4 ml-4">{product.name}</div>
           <div className="col-2 mr-4 ml-4">{formatPrice(product.price)}</div>
           <div className="col-2 mr-4 ml-4">QUANTITY</div>

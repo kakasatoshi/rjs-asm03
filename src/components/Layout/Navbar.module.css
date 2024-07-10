@@ -23,8 +23,7 @@
 .navbar-left a.active,
 .navbar-right a.active {
   color: rgb(5, 54, 248);
-  text-decoration: none;
-  margin: 0 10px;
+  font-weight: bold;
 }
 
 .navbar-logo {
@@ -45,10 +44,6 @@
 }
 
 .navbar a.active {
-  color: blue; /* Change this to your preferred color */
-  font-weight: bold;
-}
-.active{
-  color: blue; /* Change this to your preferred color */
+  color: blue; /* Màu bạn muốn cho liên kết hiện tại */
   font-weight: bold;
 }

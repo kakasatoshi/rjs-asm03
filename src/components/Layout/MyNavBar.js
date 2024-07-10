@@ -20,10 +20,10 @@ const MyNavbar = () => {
   return (
     <nav className={css.navbar}>
       <div className={css["navbar-left"]}>
-        <NavLink to="/" exact activeClassName="active">
+        <NavLink to="/" exact={true} activeClassName={css.active}>
           Home
         </NavLink>
-        <NavLink to="/shop" activeClassName="active">
+        <NavLink to="/shop" activeClassName={css.active}>
           Shop
         </NavLink>
       </div>
@@ -33,12 +33,12 @@ const MyNavbar = () => {
         </a>
       </div>
       <div className={css["navbar-right"]}>
-        <NavLink to="/cart" activeClassName="active">
+        <NavLink to="/cart" activeClassName={css.active}>
           <FontAwesomeIcon icon={faCartShopping} /> Cart
         </NavLink>
         <NavLink
           to={login ? "/" : "/login"}
-          activeClassName="active"
+          activeClassName={css.active}
           onClick={onClickHandle}
         >
           <FontAwesomeIcon icon={faUser} /> {login ? user + " Logout" : "Login"}

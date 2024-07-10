@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import css from "./ShowPopup.module.css";
 import { showAction } from "../../store";
 
@@ -7,9 +7,10 @@ const formatPrice2 = (price) => {
   return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + " VND";
 };
 
-const ShowPopup = ({ product, dispatch,show}) => {
+const ShowPopup = ({ product,show}) => {
   // const show = useSelector((state) => state.show.show);
   const [isShow, setIsShow] = useState(show);
+  const dispatch=useDispatch();
 
   const onClickClose = () => {
     setIsShow(!isShow);
