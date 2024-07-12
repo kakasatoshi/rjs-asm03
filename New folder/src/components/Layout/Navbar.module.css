@@ -47,19 +47,3 @@
   color: blue; /* Màu bạn muốn cho liên kết hiện tại */
   font-weight: bold;
 }
-
-.pending {
-  background-color: yellow;
-  color: black;
-}
-
-.active {
-  /* background-color: green; */
-  color: white;
-}
-
-.transitioning {
-  background-color: blue;
-  color: white;
-  transition: all 0.3s ease;
-}

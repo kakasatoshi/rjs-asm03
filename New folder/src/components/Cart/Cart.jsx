@@ -1,0 +1,24 @@
+import React from "react";
+import CartItem from "./CartItem";
+import css from "./CartItem.module.css"
+
+const cart = () => {
+  return (
+    <div>
+      <h2>SHOPPING CART</h2>
+      <div className="">
+      <div className="row">
+        <div className={`mr-4 ml-4 ${css.img}`}>IMAGE</div>
+        <div className="mr-4 ml-4">PRODUCT</div>
+        <div className="mr-4 ml-4">PRICE</div>
+        <div className="mr-4 ml-4">QUANTITY</div>
+        <div className="mr-4 ml-4">TOTAL</div>
+        <div className="mr-4 ml-4">REMOVE</div>
+      </div>
+      </div>
+      <CartItem />
+    </div>
+  );
+};
+
+export default cart;

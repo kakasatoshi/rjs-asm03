@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faUser } from "@fortawesome/free-solid-svg-icons";
 import css from "./Navbar.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { authAction } from "../../store";
+import { authActions } from "../../store";
 
 const MyNavbar = () => {
   const login = useSelector((state) => state.auth.logIn);
@@ -12,18 +12,37 @@ const MyNavbar = () => {
   const dispatch = useDispatch();
 
   const onClickHandle = () => {
-    dispatch(authAction.logout());
-    dispatch(authAction.setUser(""));
+    dispatch(authActions.logout());
+    dispatch(authActions.setUser(""));
     localStorage.clear();
   };
 
   return (
     <nav className={css.navbar}>
       <div className={css["navbar-left"]}>
-        <NavLink to="/" exact={true} activeClassName={css.active}>
+        <NavLink
+          to="/"
+          exact={true}
+          className={({ isActive, isPending, isTransitioning }) =>
+            [
+              isPending ? `${css.pending}` : "",
+              isActive ? `${css.active}` : "",
+              isTransitioning ? `${css.transitioning}` : "",
+            ].join(" ")
+          }
+        >
           Home
         </NavLink>
-        <NavLink to="/shop" activeClassName={css.active}>
+        <NavLink
+          to="/shop"
+          className={({ isActive, isPending, isTransitioning }) =>
+            [
+              isPending ? `${css.pending}` : "",
+              isActive ? `${css.active}` : "",
+              isTransitioning ? `${css.transitioning}` : "",
+            ].join(" ")
+          }
+        >
           Shop
         </NavLink>
       </div>
@@ -33,12 +52,27 @@ const MyNavbar = () => {
         </a>
       </div>
       <div className={css["navbar-right"]}>
-        <NavLink to="/cart" activeClassName={css.active}>
+        <NavLink
+          to="/cart"
+          className={({ isActive, isPending, isTransitioning }) =>
+            [
+              isPending ? `${css.pending}` : "",
+              isActive ? `${css.active}` : "",
+              isTransitioning ? `${css.transitioning}` : "",
+            ].join(" ")
+          }
+        >
           <FontAwesomeIcon icon={faCartShopping} /> Cart
         </NavLink>
         <NavLink
           to={login ? "/" : "/login"}
-          activeClassName={css.active}
+          className={({ isActive, isPending, isTransitioning }) =>
+            [
+              isPending ? `${css.pending}` : "",
+              isActive ? `${css.active}` : "",
+              isTransitioning ? `${css.transitioning}` : "",
+            ].join(" ")
+          }
           onClick={onClickHandle}
         >
           <FontAwesomeIcon icon={faUser} /> {login ? user + " Logout" : "Login"}

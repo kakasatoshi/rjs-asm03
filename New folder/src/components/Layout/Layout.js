@@ -6,14 +6,14 @@ import Footer from "./Footer";
 import MyNavBar from "./MyNavBar";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { showActions } from "../../store";
+import { showAction } from "../../store";
 import useProducts from "../../http/useProduct";
 
 const Layout = (props) => {
   const { products, isLoading, error } = useProducts();
   console.log(products, "layout");
   const dispatch = useDispatch();
-  dispatch(showActions.loadProductData(products));
+  dispatch(showAction.LoadProductData(products));
   if (isLoading) {
     return <p>Loading...</p>;
   }

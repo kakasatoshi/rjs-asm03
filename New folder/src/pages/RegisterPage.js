@@ -1,42 +1,50 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { authActions } from "../store";
-import css from "./LoginPage.module.css";
 import { useNavigate } from "react-router-dom";
+import css from "./LoginPage.module.css";
 
-const LoginPage = () => {
-  const navigate = useNavigate();
+const RegisterPage = () => {
+  const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
   const [error, setError] = useState("");
-  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  const validateForm = () => {
+    if (!fullName || !email || !password || !phone) {
+      return "All fields are required.";
+    }
+
+    const userArr = JSON.parse(localStorage.getItem("userArr")) || [];
+    const emailExists = userArr.some((user) => user.email === email);
+
+    if (emailExists) {
+      return "Email already exists.";
+    }
+
+    if (password.length < 8) {
+      return "Password must be longer than 8 characters.";
+    }
+
+    return "";
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!email || !password) {
-      setError("Please enter both email and password");
+    const errorMsg = validateForm();
+    if (errorMsg) {
+      setError(errorMsg);
       return;
     }
 
+    const newUser = { fullName, email, password, phone };
     const userArr = JSON.parse(localStorage.getItem("userArr")) || [];
-    const user = userArr.find(
-      (u) => u.email === email && u.password === password
-    );
+    userArr.push(newUser);
+    localStorage.setItem("userArr", JSON.stringify(userArr));
 
-    if (user) {
-      dispatch(authActions.logIn());
-      dispatch(authActions.loadUser(user));
-      dispatch(authActions.setUser(user.fullName));
-
-      localStorage.setItem("currentUser", JSON.stringify(user));
-      navigate("/");
-
-      // Redirect to another page or update the state
-    } else {
-      setError("Invalid email or password");
-      setPassword("");
-    }
+    navigate(-1); // Go back to the previous page
   };
 
   return (
@@ -52,10 +60,20 @@ const LoginPage = () => {
               style={{ borderRadius: "1rem" }}
             >
               <div className="card-body p-5 text-center">
-                <h3 className="mb-5">Sign in</h3>
+                <h3 className="mb-5">Sign Up</h3>
                 {error && <div className="alert alert-danger">{error}</div>}
                 <form onSubmit={handleSubmit}>
-                  <div data-mdb-input-init className="form-outline mb-4">
+                  <div data-mdb-input-init className="form-outline mb-2">
+                    <input
+                      type="text"
+                      id="typeFullNameX-2"
+                      className="form-control form-control-lg"
+                      placeholder="Full Name"
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
+                    />
+                  </div>
+                  <div data-mdb-input-init className="form-outline mb-2">
                     <input
                       type="email"
                       id="typeEmailX-2"
@@ -65,7 +83,7 @@ const LoginPage = () => {
                       onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
-                  <div data-mdb-input-init className="form-outline mb-4">
+                  <div data-mdb-input-init className="form-outline mb-2">
                     <input
                       type="password"
                       id="typePasswordX-2"
@@ -75,18 +93,28 @@ const LoginPage = () => {
                       onChange={(e) => setPassword(e.target.value)}
                     />
                   </div>
+                  <div data-mdb-input-init className="form-outline mb-2">
+                    <input
+                      type="text"
+                      id="typePhoneX-2"
+                      className="form-control form-control-lg"
+                      placeholder="Phone"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                    />
+                  </div>
                   <button
                     data-mdb-button-init
                     data-mdb-ripple-init
                     className="btn btn-primary btn-lg btn-block"
                     type="submit"
                   >
-                    Login
+                    Sign Up
                   </button>
                 </form>
                 <hr className="my-4" />
                 <p>
-                  Create an account? <a href="/register">Sign Up</a>
+                  Login ? <a href="/login">Click</a>
                 </p>
               </div>
             </div>
@@ -97,4 +125,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

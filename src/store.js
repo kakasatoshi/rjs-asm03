@@ -6,7 +6,6 @@ const initialState = {
   logIn: false,
   signUp: false,
   productData: [],
-  cart: [],
   isLoad: false,
   error: null,
 };
@@ -16,30 +15,26 @@ const showSlice = createSlice({
   name: "show",
   initialState,
   reducers: {
-    SHOW_POPUP(state) {
+    showPopup(state) {
       state.show = true;
     },
-    HIDE_POPUP(state) {
+    hidePopup(state) {
       state.show = false;
     },
-    LoadProductData(state, actions) {
-      state.productData = actions.payload;
+    loadProductData(state, action) {
+      state.productData = action.payload;
     },
-    UpDateProduct(state, actions) {
-      state.productData = actions.payload;
+    updateProduct(state, action) {
+      state.productData = action.payload;
     },
-    setIsLoad(state, actions) {
-      state.isLoad = actions.payload;
+    setIsLoad(state, action) {
+      state.isLoad = action.payload;
     },
-    setError(state, actions) {
-      state.error = actions.payload;
-    },
-    upDateCart(state, actions) {
-      state.cart = [...state.cart, actions.payload];
+    setError(state, action) {
+      state.error = action.payload;
     },
   },
 });
-/////////////////////////Auth/////////////////////////
 
 const initialStateAuth = {
   show: false,
@@ -53,20 +48,20 @@ const authSlice = createSlice({
   initialState: initialStateAuth,
   reducers: {
     login(state) {
-      state.logIn = !state.logIn;
+      state.logIn = true;
     },
     logOut(state) {
-      state.logIn = !state.logIn;
+      state.logIn = false;
     },
-    LoadUser(state, actions) {
-      state.arrUser = [...state.arrUser, actions.payload];
+    loadUser(state, action) {
+      state.arrUser = [...state.arrUser, action.payload];
     },
-    setUser(state, actions) {
-      state.user = actions.payload;
+    setUser(state, action) {
+      state.user = action.payload;
     },
   },
 });
-///////////////////////////////////cart///////////////////////////////
+
 const initialStateCart = {
   listCart: [],
   user: "",
@@ -76,34 +71,30 @@ const cartSlice = createSlice({
   name: "cart",
   initialState: initialStateCart,
   reducers: {
-    ADD_CART(state, actions) {
+    addCart(state, action) {
       const existingProductIndex = state.listCart.findIndex(
-        (item) => item.product._id.$oid === actions.payload.product._id.$oid
+        (item) => item.product._id.$oid === action.payload.product._id.$oid
       );
       if (existingProductIndex !== -1) {
-        state.listCart[existingProductIndex] = {
-          ...state.listCart[existingProductIndex],
-          quantity:
-            state.listCart[existingProductIndex].quantity +
-            actions.payload.quantity,
-        };
+        state.listCart[existingProductIndex].quantity +=
+          action.payload.quantity;
       } else {
-        state.listCart = [...state.listCart, actions.payload];
+        const data = {
+          product: action.payload.product,
+          quantity: action.payload.quantity,
+        };
+        state.listCart.push(data);
       }
     },
-    UPDATE_CART(state, actions) {
-      return {
-        ...state,
-        listCart: state.listCart.map((item) =>
-          item.id === actions.payload.id ? actions.payload : item
-        ),
-      };
+    updateCart(state, action) {
+      state.listCart = state.listCart.map((item) =>
+        item.id === action.payload.id ? action.payload : item
+      );
     },
-    DELETE_CART(state, actions) {
-      return {
-        ...state,
-        listCart: state.listCart.filter((item) => item.id !== actions.payload),
-      };
+    deleteCart(state, action) {
+      state.listCart = state.listCart.filter(
+        (item) => item.id !== action.payload
+      );
     },
   },
 });
@@ -117,8 +108,8 @@ const store = configureStore({
   },
 });
 
-export const showAction = showSlice.actions;
-export const authAction = authSlice.actions;
-export const cartAction = cartSlice.actions;
+export const showActions = showSlice.actions;
+export const authActions = authSlice.actions;
+export const cartActions = cartSlice.actions;
 
 export default store;

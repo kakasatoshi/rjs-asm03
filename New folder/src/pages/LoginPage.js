@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { authActions } from "../store";
+import { authAction } from "../store";
 import css from "./LoginPage.module.css";
 import { useNavigate } from "react-router-dom";
 
@@ -25,9 +25,9 @@ const LoginPage = () => {
     );
 
     if (user) {
-      dispatch(authActions.logIn());
-      dispatch(authActions.loadUser(user));
-      dispatch(authActions.setUser(user.fullName));
+      dispatch(authAction.login());
+      dispatch(authAction.LoadUser(user));
+      dispatch(authAction.setUser(user.fullName));
 
       localStorage.setItem("currentUser", JSON.stringify(user));
       navigate("/");

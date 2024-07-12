@@ -3,7 +3,7 @@ import css from "./NavBarShop.module.css";
 import useProducts from "../../http/useProduct";
 // import { useDispatch } from "react-redux";
 import { useDispatch, useSelector } from "react-redux";
-import { showActions } from "../../store";
+import { showAction } from "../../store";
 
 const NavBarShop = () => {
   const { products, isLoading, error } = useProducts();
@@ -13,11 +13,11 @@ const NavBarShop = () => {
   const onClickHandle = (text) => {
     if (text === "" || text === "all") {
       const dataLoad = products;
-      dispatch(showActions.UpDateProduct(dataLoad));
+      dispatch(showAction.UpDateProduct(dataLoad));
       console.log(text, dataLoad);
     } else {
       const dataLoad = products.filter((product) => product.category === text);
-      dispatch(showActions.UpDateProduct(dataLoad));
+      dispatch(showAction.UpDateProduct(dataLoad));
       console.log(text, dataLoad);
     }
     // useEffect(() => {

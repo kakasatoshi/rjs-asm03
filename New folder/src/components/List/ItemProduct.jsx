@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import css from './Items.module.css';
 import ShowPopup from "./ShowPopup";
 import { useDispatch, useSelector } from "react-redux";
-import { showActions } from "../../store";
+import { showAction } from "../../store";
 import formatPrice from "../Layout/formatPrice";
 
 // const formatPrice2 = (price) => {
@@ -18,7 +18,7 @@ const ItemProduct = ({ product }) => {
 
   const onClick = () => {
     
-    dispatch(showActions.showPopup());
+    dispatch(showAction.SHOW_POPUP());
     setIsShow(!isShow);
 
   };

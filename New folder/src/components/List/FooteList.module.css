@@ -1,0 +1,36 @@
+.content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: #F8F9FA;
+}
+
+.contentBtn {
+    /* position: absolute;
+    top:20%;
+    left: 5%;
+    width: auto;
+     */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+   padding-bottom: 20px;
+   background-color: #F4F5F9;
+  }
+   
+   .button-container {
+     margin-top: 20px;
+   }
+   
+   .btn {
+     background-color: black;
+     color: white;
+     padding: 10px 20px;
+     border: none;
+     cursor: pointer;
+     border-radius: 5%;
+     margin-left: 2px;
+   }
+   .input{
+    height: 25px;
+   }

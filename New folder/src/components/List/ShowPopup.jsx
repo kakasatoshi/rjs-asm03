@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import css from "./ShowPopup.module.css";
-import { showActions } from "../../store";
+import { showAction } from "../../store";
 
 const formatPrice2 = (price) => {
   return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + " VND";
@@ -14,7 +14,7 @@ const ShowPopup = ({ product,show}) => {
 
   const onClickClose = () => {
     setIsShow(!isShow);
-    dispatch(showActions.hidePopup());
+    dispatch(showAction.HIDE_POPUP());
     
   };
    const  onClickHandle=()=>{
