@@ -72,18 +72,27 @@ const cartSlice = createSlice({
   initialState: initialStateCart,
   reducers: {
     addCart(state, action) {
-      const existingProductIndex = state.listCart.findIndex(
-        (item) => item.product._id.$oid === action.payload.product._id.$oid
-      );
-      if (existingProductIndex !== -1) {
-        state.listCart[existingProductIndex].quantity +=
-          action.payload.quantity;
-      } else {
-        const data = {
-          product: action.payload.product,
-          quantity: action.payload.quantity,
-        };
-        state.listCart.push(data);
+      // if(state.listCart.includes(action.payload)
+      if (state.listCart.length === 0) state.listCart.push(action.payload);
+      else {
+        const existingProductIndex = state.listCart.findIndex(
+          (item) => item.product._id.$oid === action.payload.product._id.$oid
+        );
+        if (existingProductIndex === -1) {
+          const data = {
+            product: action.payload.product,
+            quantity: action.payload.quantity,
+          };
+          state.listCart.push(data);
+        } else {
+          let newItem = [...state.listCart];
+          newItem[existingProductIndex] = {
+            ...newItem[existingProductIndex],
+            quantity:
+              newItem[existingProductIndex].quantity + action.payload.quantity,
+          };
+          state.listCart = newItem;
+        }
       }
     },
     updateCart(state, action) {
