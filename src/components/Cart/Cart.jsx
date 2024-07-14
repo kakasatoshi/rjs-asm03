@@ -1,24 +1,54 @@
 import React from "react";
 import CartItem from "./CartItem";
-import css from "./CartItem.module.css"
+import css from "./Cart.module.css";
+import Total from "./Total";
+import { useSelector } from "react-redux";
+import WestIcon from "@mui/icons-material/West";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
-const cart = () => {
+
+
+const Cart = () => {
+  const data = useSelector((state) => state.show.productData); // sử dụng tạm product data
+  console.log(data);
+  const testData = data.filter((e) => e.category === "watch");
+
   return (
-    <div>
-      <h2>SHOPPING CART</h2>
-      <div className="">
-      <div className="row">
-        <div className={`mr-4 ml-4 ${css.img}`}>IMAGE</div>
-        <div className="mr-4 ml-4">PRODUCT</div>
-        <div className="mr-4 ml-4">PRICE</div>
-        <div className="mr-4 ml-4">QUANTITY</div>
-        <div className="mr-4 ml-4">TOTAL</div>
-        <div className="mr-4 ml-4">REMOVE</div>
+    <div className={css.main}>
+      <h2 className="p-4">SHOPPING CART</h2>
+      <div className="row justify-content-between">
+        <div className="left col-7">
+          <div className={`row ${css.container} text-center`}>
+            <div className={`col-2 text-center`}>IMAGE</div>
+            <div className="col-3 text-center">PRODUCT</div>
+            <div className="col-2 text-center">PRICE</div>
+            <div className="col-2 text-center">QUANTITY</div>
+            <div className="col-2 text-center">TOTAL</div>
+            <div className="col-1 text-center">REMOVE</div>
+          </div>
+          {testData.map((item, index) => (
+            <CartItem product={item} key={index} />
+          ))}
+          <div className="d-flex flex-row justify-content-between p-2 mt-3" style={{backgroundColor:"#F8F9FA"}}>
+            <button className="btn" onClick={()=>{
+               window.location.href =`http://localhost:3000/shop`;
+            }}>
+              <WestIcon /> Continue shopping
+            </button>
+            <button className="btn" onClick={()=>{
+              window.location.href =`http://localhost:3000/checkout`
+            }}>
+              Proceed to checkout <ArrowForwardIcon />
+            </button>
+          </div>
+        </div>
+        <div className="right col-4 column">
+          <Total />
+        </div>
       </div>
-      </div>
-      <CartItem />
+     
     </div>
   );
 };
 
-export default cart;
+export default Cart;

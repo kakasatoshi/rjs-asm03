@@ -34,7 +34,7 @@ const ShowPopup = ({ product,show}) => {
             </div>
             <div className={css.contentRight + " " + css.item }>
               <h4 className={css.name}>{product.name}</h4>
-              <p className={css.price}>{formatPrice2(product.price)}</p>
+              <p className={`col-auto ${css.price}`}>{formatPrice2(product.price)}</p>
               <p>{product.short_desc}</p>
               <div>
                 <button className={css.btn} onClick={onClickHandle}>View Detail</button>

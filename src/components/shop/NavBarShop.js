@@ -6,9 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { showActions } from "../../store";
 
 const NavBarShop = () => {
-  const { products, isLoading, error } = useProducts();
+  const { products } = useProducts();
   const dispatch = useDispatch();
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
 
   const onClickHandle = (text) => {
     if (text === "" || text === "all") {

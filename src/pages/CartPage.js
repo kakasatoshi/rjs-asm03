@@ -2,7 +2,6 @@ import React from "react";
 import BannerShop from "../components/shop/BannerShop";
 import Cart from "../components/Cart/Cart";
 
-
 const CartPage = () => {
   return (
     <div>

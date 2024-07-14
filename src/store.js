@@ -65,12 +65,16 @@ const authSlice = createSlice({
 const initialStateCart = {
   listCart: [],
   user: "",
+  total: 0,
 };
 
 const cartSlice = createSlice({
   name: "cart",
   initialState: initialStateCart,
   reducers: {
+    updateTotal(state, action) {
+      state.total += action.payload;
+    },
     addCart(state, action) {
       // if(state.listCart.includes(action.payload)
       if (state.listCart.length === 0) state.listCart.push(action.payload);

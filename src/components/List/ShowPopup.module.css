@@ -22,7 +22,8 @@
 .contentRight{
   display: flex;
   flex-direction: column;
-  width: 65%;
+  width: max-content;
+  margin: 10px;
   
 }
 .icon{
@@ -50,9 +51,10 @@
 /* }  */
 
 .img img{
-    width: 80%;
+    width: 100%;
     height: auto ;
     border-radius: 20px;
+    margin: 10px;
 }
 
 .img img:hover {

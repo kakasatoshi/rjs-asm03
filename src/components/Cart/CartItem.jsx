@@ -1,36 +1,55 @@
 import React from "react";
 import useProduct from "../../http/useProduct";
 import formatPrice from "../Layout/formatPrice";
-import css from "./CartItem.module.css"
+import css from "./CartItem.module.css";
 
-const CartItem = () => {
-  const { products, isLoad, err } = useProduct();
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
+import { useSelector } from "react-redux";
 
-  if (isLoad) {
-    return <div>Loading...</div>;
-  }
+const CartItem = ({product}) => {
+  // const { products, isLoad, err } = useProduct();
+  const [quantity, setQuantity] = React.useState(1);
 
-  if (err) {
-    return <div>Error: {err}</div>;
-  }
 
-  if (!products || products.length === 0) {
+  if (!product) {
     return <div>No products available.</div>;
   }
 
-  const product = products[0];
+  // const product = products[0];
 
   return (
-    <div>
-      <div className="">
-        <div className="row">
-          <div className={`col-2 mr-4 ml-4 ${css.img}`}><img src={product.img1} alt='sanpham' /></div>
-          <div className="col-2 mr-4 ml-4">{product.name}</div>
-          <div className="col-2 mr-4 ml-4">{formatPrice(product.price)}</div>
-          <div className="col-2 mr-4 ml-4">QUANTITY</div>
-          <div className="col-2 mr-4 ml-4">TOTAL</div>
-          <div className="col-2 mr-4 ml-4">REMOVE</div>
+    <div className="row">
+      <div className={`col-2 ${css.img} text-center`}>
+        <img src={product.img1} alt="sanpham" />
+      </div>
+      <div className="col-3 text-center">{product.name}</div>
+      <div className="col-2 text-center">{formatPrice(product.price)}</div>
+      <div className="col-2 text-center">
+        <div
+          className={`d-flex justify-content-left ${css.quantity} align-items-center `}
+        >
+          <button
+            className={`btn ${css.faCaret}`}
+            onClick={() => setQuantity(quantity > 1 ? quantity - 1 : 1)}
+          >
+            <FontAwesomeIcon icon={faCaretLeft} />
+          </button>
+          <p className="align-items-center ">{quantity}</p>
+          <button
+            className={`btn ${css.faCaret}`}
+            onClick={() => setQuantity(quantity + 1)}
+          >
+            <FontAwesomeIcon icon={faCaretRight} />
+          </button>
         </div>
+      </div>
+      <div className="col-2 text-center">
+        {formatPrice(product.price * quantity)}
+      </div>
+      <div className="col-1 text-center">
+        <button className="btn" ><DeleteIcon /></button>
       </div>
     </div>
   );
