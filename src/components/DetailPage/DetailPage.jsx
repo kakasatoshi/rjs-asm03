@@ -15,7 +15,7 @@ const DetailPage = () => {
   const data = useSelector((state) => state.show.productData);
   const product = data.find((e) => e._id.$oid === id);
   const categoryData = data.filter(
-    (e) => e.category === product?.category && e._id.$oid !== id
+    (e) => e.category === product.category && e._id.$oid !== id
   );
 
   const [quantity, setQuantity] = useState(1);

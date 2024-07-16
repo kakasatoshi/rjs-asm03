@@ -28,7 +28,7 @@ const useProducts = () => {
       }));
 
       // console.log(arr);
-      setProducts(data);
+      setProducts(arr);
     };
     sendRequest(requestConfig, applyData);
   }, []);
