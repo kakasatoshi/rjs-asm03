@@ -12,7 +12,7 @@ const MyNavbar = () => {
   const dispatch = useDispatch();
 
   const onClickHandle = () => {
-    dispatch(authActions.logout());
+    dispatch(authActions.logOut());
     dispatch(authActions.setUser(""));
     localStorage.clear();
   };
