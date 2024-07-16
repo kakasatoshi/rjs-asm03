@@ -6,9 +6,7 @@ import { useNavigate } from "react-router-dom";
 import formatPrice from "../Layout/formatPrice";
 
 const ShowPopup = () => {
-  const show = useSelector((state) => state.show.show);
-  const product = useSelector((state) => state.show.product);
-
+  const { show, product } = useSelector((state) => state.show);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -18,14 +16,11 @@ const ShowPopup = () => {
   };
 
   const onClickHandle = () => {
-    dispatch(showActions.setShow());
-    dispatch(showActions.setProduct(null));
-    navigate("/shop/" + product._id.$oid);
+    onClickClose();
+    navigate(`/shop/${product._id.$oid}`);
   };
 
-  if (!show) return null;
-
-  if (!product) return null;
+  if (!show || !product) return null;
 
   return (
     <div className={css.main}>
@@ -57,4 +52,4 @@ const ShowPopup = () => {
   );
 };
 
-export default ShowPopup;
+export default React.memo(ShowPopup);

@@ -76,32 +76,37 @@ const cartSlice = createSlice({
     },
     addCart(state, action) {
       // if(state.listCart.includes(action.payload)
-      if (state.listCart.length === 0) state.listCart.push(action.payload);
-      else {
-        const existingProductIndex = state.listCart.findIndex(
-          (item) => item.product._id.$oid === action.payload.product._id.$oid
-        );
-        if (existingProductIndex === -1) {
-          const data = {
-            product: action.payload.product,
-            quantity: action.payload.quantity,
-          };
-          state.listCart.push(data);
-        } else {
-          let newItem = [...state.listCart];
-          newItem[existingProductIndex] = {
-            ...newItem[existingProductIndex],
-            quantity:
-              newItem[existingProductIndex].quantity + action.payload.quantity,
-          };
-          state.listCart = newItem;
-        }
+
+      const existingProductIndex = state.listCart.findIndex(
+        (item) => item.product._id.$oid === action.payload.product._id.$oid
+      );
+      if (existingProductIndex === -1) {
+        const data = {
+          product: action.payload.product,
+          quantity: action.payload.quantity,
+        };
+        state.listCart.push(data);
+      } else {
+        let newItem = [...state.listCart];
+        newItem[existingProductIndex] = {
+          ...newItem[existingProductIndex],
+          quantity:
+            newItem[existingProductIndex].quantity + action.payload.quantity,
+        };
+        state.listCart = newItem;
       }
     },
     updateCart(state, action) {
-      state.listCart = state.listCart.map((item) =>
-        item.id === action.payload.id ? action.payload : item
+      const existingProductIndex = state.listCart.findIndex(
+        (item) => item.product._id.$oid === action.payload.product._id.$oid
       );
+      const data = {
+        product: state.listCart[existingProductIndex].product,
+        quantity: action.payload.quantity,
+      };
+
+      state.listCart[existingProductIndex] = data;
+      // state.listCart = [...state.listCart, data];
     },
     deleteCart(state, action) {
       state.listCart = state.listCart.filter(

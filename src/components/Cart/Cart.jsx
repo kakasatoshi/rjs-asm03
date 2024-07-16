@@ -8,8 +8,9 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
-  const data = useSelector((state) => state.show.productData); // sử dụng tạm product data
-  const testData = data.filter((e) => e.category === "watch");
+  const data = useSelector((state) => state.cart.listCart); // sử dụng tạm product data
+  // const testData = data.filter((e) => e.category === "watch");
+  console.log(data);
   const navigate = useNavigate();
 
   const goToCheckOut = React.useCallback(() => {
@@ -33,8 +34,12 @@ const Cart = () => {
             <div className="col-2 text-center">TOTAL</div>
             <div className="col-1 text-center">REMOVE</div>
           </div>
-          {testData.map((item, index) => (
-            <CartItem product={item} key={index} />
+          {data.map((item, index) => (
+            <CartItem
+              product={item.product}
+              key={index}
+              quantity={item.quantity}
+            />
           ))}
           <div
             className="d-flex flex-row justify-content-between p-2 mt-3"
