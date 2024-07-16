@@ -12,7 +12,7 @@ const ItemProduct = ({ product }) => {
 
   const onClick = () => {
     dispatch(showActions.setShow());
-    dispatch(showActions.setId(product._id.$oid));
+    dispatch(showActions.setProduct(product));
   };
 
   if (!product || product.length === 0) {

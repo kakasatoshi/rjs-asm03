@@ -7,6 +7,7 @@ import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import ItemProduct from "../List/ItemProduct";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../store";
+import ShowPopup from "../List/ShowPopup";
 
 const DetailPage = () => {
   const { id } = useParams();
@@ -19,6 +20,7 @@ const DetailPage = () => {
 
   const [quantity, setQuantity] = useState(1);
   const { listCart } = useSelector((state) => state.cart);
+  const show = useSelector((state) => state.show.show);
 
   console.log(listCart, "LIST CART");
 
@@ -45,28 +47,25 @@ const DetailPage = () => {
           <div className="row gx-5">
             <aside className="d-flex col-lg-6">
               <div className="d-flex flex-column align-items-center mr-2">
-                {[
-                  product.img1,
-                  product.img2,
-                  product.img3,
-                  product.img4,
-                ].map((img, idx) => (
-                  <a
-                    key={idx}
-                    className="border mx-1 my-1 rounded-2 item-thumb"
-                    href={img}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <img
-                      width="100"
-                      height="100"
-                      className="rounded-2"
-                      src={img}
-                      alt={`Thumbnail ${idx + 1}`}
-                    />
-                  </a>
-                ))}
+                {[product.img1, product.img2, product.img3, product.img4].map(
+                  (img, idx) => (
+                    <a
+                      key={idx}
+                      className="border mx-1 my-1 rounded-2 item-thumb"
+                      href={img}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <img
+                        width="100"
+                        height="100"
+                        className="rounded-2"
+                        src={img}
+                        alt={`Thumbnail ${idx + 1}`}
+                      />
+                    </a>
+                  )
+                )}
               </div>
               <div className="border rounded-4 mb-3 d-flex justify-content-center">
                 <a
@@ -76,7 +75,11 @@ const DetailPage = () => {
                   rel="noopener noreferrer"
                 >
                   <img
-                    style={{ maxWidth: "100%", maxHeight: "100vh", margin: "auto" }}
+                    style={{
+                      maxWidth: "100%",
+                      maxHeight: "100vh",
+                      margin: "auto",
+                    }}
                     className="rounded-4 fit"
                     src={product.img1}
                     alt="Main product"
@@ -104,7 +107,9 @@ const DetailPage = () => {
                     QUANTITY
                     <button
                       className={`btn ${css.faCaret}`}
-                      onClick={() => setQuantity(quantity > 1 ? quantity - 1 : 1)}
+                      onClick={() =>
+                        setQuantity(quantity > 1 ? quantity - 1 : 1)
+                      }
                     >
                       <FontAwesomeIcon icon={faCaretLeft} />
                     </button>
@@ -144,13 +149,14 @@ const DetailPage = () => {
             dangerouslySetInnerHTML={{ __html: formattedText }}
           ></div>
           <div className="containter">
-          {/* col-lg-4 */}
+            {/* col-lg-4 */}
             <h4 className="card-title">RELATED PRODUCT</h4>
             <div className="d-flex column ">
               {categoryData.map((item, idx) => (
                 <ItemProduct product={item} key={idx} />
               ))}
             </div>
+            {show && <ShowPopup />}
           </div>
         </div>
       </section>

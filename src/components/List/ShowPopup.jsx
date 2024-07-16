@@ -5,17 +5,21 @@ import { showActions } from "../../store";
 import { useNavigate } from "react-router-dom";
 import formatPrice from "../Layout/formatPrice";
 
-const ShowPopup = ({ product }) => {
+const ShowPopup = () => {
   const show = useSelector((state) => state.show.show);
+  const product = useSelector((state) => state.show.product);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onClickClose = () => {
     dispatch(showActions.setShow());
+    dispatch(showActions.setProduct(null));
   };
 
   const onClickHandle = () => {
     dispatch(showActions.setShow());
+    dispatch(showActions.setProduct(null));
     navigate("/shop/" + product._id.$oid);
   };
 

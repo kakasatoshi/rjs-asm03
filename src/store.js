@@ -6,7 +6,7 @@ const initialState = {
   productData: [],
   isLoad: false,
   error: null,
-  id: null,
+  product: {},
 };
 
 // Slices
@@ -29,8 +29,8 @@ const showSlice = createSlice({
     setError(state, action) {
       state.error = action.payload;
     },
-    setId(state, action) {
-      state.id = action.payload ? action.payload : null;
+    setProduct(state, action) {
+      state.product = action.payload ? action.payload : null;
     },
   },
 });

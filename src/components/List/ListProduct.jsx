@@ -8,7 +8,7 @@ import ShowPopup from "./ShowPopup";
 
 const ListProduct = ({ products }) => {
   // console.log(products, "ListProduct");
-  const id = useSelector((state) => state.show.id) ||"";
+  const id = useSelector((state) => state.show.id) || "";
   const show = useSelector((state) => state.show.show);
   const product = products.filter((e) => e._id.$oid === id) || null;
   if (products === null || products == []) {
@@ -21,7 +21,7 @@ const ListProduct = ({ products }) => {
         {products.map((e) => (
           <ItemProduct key={e._id} product={e} />
         ))}
-        {show && <ShowPopup product={product} />}
+        {show && <ShowPopup />}
       </div>
     </Fragment>
   );
