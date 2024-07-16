@@ -13,11 +13,11 @@ const NavBarShop = () => {
   const onClickHandle = (text) => {
     if (text === "" || text === "all") {
       const dataLoad = products;
-      dispatch(showActions.UpDateProduct(dataLoad));
+      dispatch(showActions.updateProduct(dataLoad));
       console.log(text, dataLoad);
     } else {
       const dataLoad = products.filter((product) => product.category === text);
-      dispatch(showActions.UpDateProduct(dataLoad));
+      dispatch(showActions.updateProduct(dataLoad));
       console.log(text, dataLoad);
     }
     // useEffect(() => {
