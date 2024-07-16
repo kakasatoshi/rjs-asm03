@@ -5,13 +5,20 @@ import Total from "./Total";
 import { useSelector } from "react-redux";
 import WestIcon from "@mui/icons-material/West";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-
-
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const data = useSelector((state) => state.show.productData); // sử dụng tạm product data
-  console.log(data);
   const testData = data.filter((e) => e.category === "watch");
+  const navigate = useNavigate();
+
+  const goToCheckOut = React.useCallback(() => {
+    navigate("/checkout");
+  }, []);
+
+  const goToShopPage = React.useCallback(() => {
+    navigate("/shop");
+  }, []);
 
   return (
     <div className={css.main}>
@@ -29,15 +36,14 @@ const Cart = () => {
           {testData.map((item, index) => (
             <CartItem product={item} key={index} />
           ))}
-          <div className="d-flex flex-row justify-content-between p-2 mt-3" style={{backgroundColor:"#F8F9FA"}}>
-            <button className="btn" onClick={()=>{
-               window.location.href =`http://localhost:3000/shop`;
-            }}>
+          <div
+            className="d-flex flex-row justify-content-between p-2 mt-3"
+            style={{ backgroundColor: "#F8F9FA" }}
+          >
+            <button className="btn" onClick={goToShopPage}>
               <WestIcon /> Continue shopping
             </button>
-            <button className="btn" onClick={()=>{
-              window.location.href =`http://localhost:3000/checkout`
-            }}>
+            <button className="btn" onClick={goToCheckOut}>
               Proceed to checkout <ArrowForwardIcon />
             </button>
           </div>
@@ -46,7 +52,6 @@ const Cart = () => {
           <Total />
         </div>
       </div>
-     
     </div>
   );
 };

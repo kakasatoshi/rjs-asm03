@@ -40,7 +40,8 @@ const ShopPage = () => {
         </div>
         <div className={css.right}>
           <div>
-            <ListProduct products={data} />{" "}
+            <ListProduct products={data} />
+           
           </div>
         </div>
       </div>

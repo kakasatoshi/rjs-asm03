@@ -3,11 +3,10 @@ import { configureStore, createSlice } from "@reduxjs/toolkit";
 // Initial states
 const initialState = {
   show: false,
-  logIn: false,
-  signUp: false,
   productData: [],
   isLoad: false,
   error: null,
+  id: null,
 };
 
 // Slices
@@ -15,11 +14,8 @@ const showSlice = createSlice({
   name: "show",
   initialState,
   reducers: {
-    showPopup(state) {
-      state.show = true;
-    },
-    hidePopup(state) {
-      state.show = false;
+    setShow(state) {
+      state.show = !state.show;
     },
     loadProductData(state, action) {
       state.productData = action.payload;
@@ -32,6 +28,9 @@ const showSlice = createSlice({
     },
     setError(state, action) {
       state.error = action.payload;
+    },
+    setId(state, action) {
+      state.id = action.payload ? action.payload : null;
     },
   },
 });
