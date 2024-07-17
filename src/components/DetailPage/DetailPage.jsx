@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import css from "./DetailPage.module.css";
 import { useParams } from "react-router-dom";
 import formatPrice from "../Layout/formatPrice";
@@ -20,24 +20,26 @@ const DetailPage = () => {
 
   const [quantity, setQuantity] = useState(1);
   const { listCart } = useSelector((state) => state.cart);
-  const show = useSelector((state) => state.show.show);
 
-  console.log(listCart, "LIST CART");
+  useEffect(() => {
+    localStorage.setItem("listCart", JSON.stringify(listCart));
+  }, [listCart]);
+
+  const show = useSelector((state) => state.show.show);
 
   if (!product) {
     return <div>Product not found</div>;
   }
 
-  const text = product.long_desc;
-  const formattedText = text.replace(/\n\n/g, "<br />");
+  const formattedText = product.long_desc.replace(/\n\n/g, "<br />");
 
   const onClickHandle = (e) => {
     e.preventDefault();
-    const data = {
+    const newProduct = {
       product: product,
       quantity: quantity,
     };
-    dispatch(cartActions.addCart(data));
+    dispatch(cartActions.addCart(newProduct));
   };
 
   return (
@@ -102,7 +104,7 @@ const DetailPage = () => {
                 <hr />
                 <div>
                   <div
-                    className={`d-flex justify-content-left ${css.quantity} align-items-center `}
+                    className={`d-flex justify-content-left ${css.quantity} align-items-center`}
                   >
                     QUANTITY
                     <button
@@ -113,7 +115,7 @@ const DetailPage = () => {
                     >
                       <FontAwesomeIcon icon={faCaretLeft} />
                     </button>
-                    <p className="align-items-center ">{quantity}</p>
+                    <p className="align-items-center">{quantity}</p>
                     <button
                       className={`btn ${css.faCaret}`}
                       onClick={() => setQuantity(quantity + 1)}
@@ -122,7 +124,7 @@ const DetailPage = () => {
                     </button>
                     <a
                       href="#"
-                      className={`btn shadow-0 bg-dark text-white`}
+                      className="btn shadow-0 bg-dark text-white"
                       onClick={onClickHandle}
                     >
                       Add to cart
@@ -148,10 +150,9 @@ const DetailPage = () => {
             className="col-lg-8 mb-4"
             dangerouslySetInnerHTML={{ __html: formattedText }}
           ></div>
-          <div className="containter">
-            {/* col-lg-4 */}
+          <div className="container">
             <h4 className="card-title">RELATED PRODUCT</h4>
-            <div className="d-flex column ">
+            <div className="d-flex column">
               {categoryData.map((item, idx) => (
                 <ItemProduct product={item} key={idx} />
               ))}

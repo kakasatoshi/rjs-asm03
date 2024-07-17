@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CartItem from "./CartItem";
 import css from "./Cart.module.css";
 import Total from "./Total";
@@ -10,6 +10,9 @@ import { useNavigate } from "react-router-dom";
 const Cart = () => {
   const data = useSelector((state) => state.cart.listCart); // sử dụng tạm product data
   // const testData = data.filter((e) => e.category === "watch");
+  useEffect(() => {
+    localStorage.setItem("listCart", JSON.stringify(data));
+  }, [data]);
   console.log(data);
   const navigate = useNavigate();
 

@@ -55,7 +55,7 @@ const CartItem = ({ product, quantity }) => {
       <div className="col-1 text-center">
         <button
           className="btn"
-          onClick={() => dispatch(cartActions.removeFromCart(product._id))}
+          onClick={() => dispatch(cartActions.deleteCart(product._id.$oid))}
         >
           <DeleteIcon />
         </button>

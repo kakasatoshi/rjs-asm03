@@ -15,7 +15,7 @@ const CheckoutPage = () => {
       <BannerShop text="CHECKOUT" textRight="HOME/CART/CHECKOUT" />
       <h2 className="p-2">BILLING DETAILS</h2>
       <div className={`row justify-content-between`}>
-        <div className="left col-7 m-4 d-flex flex-column">
+        <div className="left col-7 d-flex flex-column">
           <label className="mt-2" htmlFor="" style={{ fontWeight: "bold" }}>
             FULL NAME:
           </label>
@@ -41,14 +41,14 @@ const CheckoutPage = () => {
             </button>
           </div>
         </div>
-        <div className="right col-auto column m-0">
+        <div className="right col-5 row m-0">
           <div
-            className={`container bg-dank column text-left p-3 ${css.total}`}
+            className={`container bg-dank column text-left col-auto p-3 ${css.total}`}
           >
             <h4 className="mb-3">YOUR ORDER</h4>
             {listCart.map((item, index) => (
               <div key={index} className="row justify-content-between mb-2">
-                <p className="col-auto mb-0 fw-bold fs-6 fst-italic">
+                <p className="col-auto fw-bold fs-6 fst-italic text-truncate">
                   {item.product.name}
                 </p>
                 <p className="col-auto mb-0">{`${formatPrice(
@@ -57,17 +57,7 @@ const CheckoutPage = () => {
                 <hr />
               </div>
             ))}
-            {/* <div className="row justify-content-between mb-2">
-              <p className="col-auto mb-0">SUBTOTAL</p>
-              <p className="col-auto mb-0">11000vnd</p>
-            </div>
-
-            <div className="row justify-content-between mb-4">
-              <p className="col-auto mb-0">TOTAL</p>
-              <p className="col-auto mb-0">1000vnd</p>
-            </div>*/}
-
-            <div className=" row justify-content-between mt-4">
+            <div className="row justify-content-between mt-4">
               <p className="col-auto mb-0 fs-5 fw-bold">TOTAL</p>
               <p className="col-auto mb-0 ">{formatPrice(total)}</p>
             </div>

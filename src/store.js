@@ -46,7 +46,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState: initialStateAuth,
   reducers: {
-    login(state) {
+    logIn(state) {
       state.logIn = true;
     },
     logOut(state) {
@@ -110,7 +110,7 @@ const cartSlice = createSlice({
     },
     deleteCart(state, action) {
       state.listCart = state.listCart.filter(
-        (item) => item.id !== action.payload
+        (item) => item.product._id.$oid !== action.payload
       );
     },
   },

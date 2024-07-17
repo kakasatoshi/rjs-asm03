@@ -30,8 +30,8 @@ const ShowPopup = () => {
             X
           </button>
         </div>
-        <div className={css.content}>
-          <div className={`${css.img} ${css.item}`}>
+        <div className={`${css.content}`}>
+          <div className={`${css.img} ${css.item} `}>
             <img src={product.img1} alt="product" />
           </div>
           <div className={`${css.contentRight} ${css.item}`}>
