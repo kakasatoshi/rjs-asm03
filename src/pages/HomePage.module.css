@@ -82,7 +82,12 @@ height: auto;
   height: auto;
   display: block;
 }
+
 .hide{
   /* display: none; */
   background-color: rgb(55, 54, 53);
+}
+.list1 img:hover, .list2 img:hover {
+  transform: scale(1.1); /* Phóng to hình ảnh lên 110% khi hover */
+  transition: transform 0.3s ease; /* Thời gian và kiểu chuyển động */
 }
