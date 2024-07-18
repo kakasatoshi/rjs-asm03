@@ -13,14 +13,14 @@
 .ChatBox{
     /* width:400px ; */
     position: fixed;
-    bottom: 20%;
+    bottom: 30%;
     right: 10%;
 }
 .icon{
     width: max-content;
     height: max-content;
     position: fixed;
-    bottom: 15%;
+    bottom: 25%;
     right: 10%;
     border-radius: 50%;
     font-size: 10px;

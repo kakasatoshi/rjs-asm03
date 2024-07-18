@@ -5,6 +5,6 @@
 .total{
  background-color: #F8F9FA;
 }
- .total hr{
-  margin: 0;
+ .hr{
+   flex-shrink: 1;
  }

@@ -54,7 +54,7 @@ const CheckoutPage = () => {
                 <p className="col-auto mb-0">{`${formatPrice(
                   item.product.price
                 )} X ${item.quantity}`}</p>
-                <hr />
+                <hr className={css.hr} />
               </div>
             ))}
             <div className="row justify-content-between mt-4">
