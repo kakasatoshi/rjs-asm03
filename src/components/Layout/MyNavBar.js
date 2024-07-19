@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faUser } from "@fortawesome/free-solid-svg-icons";
@@ -7,47 +7,36 @@ import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store";
 
 const MyNavbar = () => {
-  const data = JSON.parse(localStorage.getItem("currentUser") || false);
-
-  const dataLogIn = useSelector((state) => state.auth.logIn);
-  const login = data.show ? data.show : dataLogIn;
-  const dataUser = useSelector((state) => state.auth.user);
-  const user = data.fullName ? data.fullName : dataUser;
   const dispatch = useDispatch();
+  const data = JSON.parse(localStorage.getItem("currentUser")) || {};
+  const dataLogIn = useSelector((state) => state.auth.logIn);
+  const login = dataLogIn;
+  const dataUser = useSelector((state) => state.auth.user);
+  const user = data.fullName || dataUser;
 
   const onClickHandle = () => {
-    // dispatch(authActions.logOut());
-    dispatch(authActions.setUser(""));
-    dispatch(authActions.logIn());
-    localStorage.removeItem("currentUser");
+    if (dataLogIn) {
+      localStorage.removeItem("currentUser");
+      dispatch(authActions.setUser(""));
+      dispatch(authActions.logOut());
+    }
+  };
+
+  const getClassName = ({ isActive, isPending, isTransitioning }) => {
+    let className = "";
+    if (isPending) className += css.pending;
+    if (isActive) className += ` ${css.active}`;
+    if (isTransitioning) className += ` ${css.transitioning}`;
+    return className.trim();
   };
 
   return (
     <nav className={css.navbar}>
       <div className={css["navbar-left"]}>
-        <NavLink
-          to="/"
-          exact={true}
-          className={({ isActive, isPending, isTransitioning }) =>
-            [
-              isPending ? `${css.pending}` : "",
-              isActive ? `${css.active}` : "",
-              isTransitioning ? `${css.transitioning}` : "",
-            ].join(" ")
-          }
-        >
+        <NavLink to="/" className={getClassName}>
           Home
         </NavLink>
-        <NavLink
-          to="/shop"
-          className={({ isActive, isPending, isTransitioning }) =>
-            [
-              isPending ? `${css.pending}` : "",
-              isActive ? `${css.active}` : "",
-              isTransitioning ? `${css.transitioning}` : "",
-            ].join(" ")
-          }
-        >
+        <NavLink to="/shop" className={getClassName}>
           Shop
         </NavLink>
       </div>
@@ -57,30 +46,15 @@ const MyNavbar = () => {
         </a>
       </div>
       <div className={css["navbar-right"]}>
-        <NavLink
-          to="/cart"
-          className={({ isActive, isPending, isTransitioning }) =>
-            [
-              isPending ? `${css.pending}` : "",
-              isActive ? `${css.active}` : "",
-              isTransitioning ? `${css.transitioning}` : "",
-            ].join(" ")
-          }
-        >
+        <NavLink to="/cart" className={getClassName}>
           <FontAwesomeIcon icon={faCartShopping} /> Cart
         </NavLink>
         <NavLink
           to={login ? "/" : "/login"}
-          className={({ isActive, isPending, isTransitioning }) =>
-            [
-              isPending ? `${css.pending}` : "",
-              isActive ? `${css.active}` : "",
-              isTransitioning ? `${css.transitioning}` : "",
-            ].join(" ")
-          }
+          className={getClassName}
           onClick={onClickHandle}
         >
-          <FontAwesomeIcon icon={faUser} /> {login ? user + " Logout" : "Login"}
+          <FontAwesomeIcon icon={faUser} /> {login ? `${user} Logout` : "Login"}
         </NavLink>
       </div>
     </nav>

@@ -29,7 +29,7 @@ const LoginPage = () => {
       dispatch(authActions.loadUser(user));
       dispatch(authActions.setUser(user.fullName));
       dispatch(authActions.setShow());
-      localStorage.removeItem("userArr");
+      // localStorage.removeItem("userArr");
       const newUser = {
         fullName: user.fullName,
         email: user.email,

@@ -8,7 +8,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
-  const data = useSelector((state) => state.cart.listCart); // sử dụng tạm product data
+  const data = useSelector((state) => state.cart.listCart); // đã update ở trang layout lấy data từ localStorage
   // const testData = data.filter((e) => e.category === "watch");
 
   useEffect(() => {

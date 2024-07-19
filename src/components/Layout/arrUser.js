@@ -1,5 +1,3 @@
-
-
 const arrUser = () => {
   return [
     {
@@ -21,9 +19,9 @@ const arrUser = () => {
       phone: "0903456789",
     },
     {
-      fullName: "Pham Thi D",
-      email: "phamthid@example.com",
-      password: "password101",
+      fullName: "Admin",
+      email: "admin@example.com",
+      password: "11111111",
       phone: "0904567890",
     },
   ];

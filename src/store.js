@@ -58,8 +58,8 @@ const authSlice = createSlice({
     setUser(state, action) {
       state.user = action.payload;
     },
-    setShow(state){
-      state.show =!state.show;
+    setShow(state) {
+      state.show = !state.show;
     },
   },
 });
@@ -78,7 +78,8 @@ const cartSlice = createSlice({
       state.total += action.payload;
     },
     addAllCart(state, action) {
-      state.listCart = [...state.listCart, ...action.payload];
+      state.listCart = [];
+      action.payload.map((e) => state.listCart.push(e));
     },
     addCart(state, action) {
       // if(state.listCart.includes(action.payload)
