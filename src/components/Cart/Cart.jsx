@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 const Cart = () => {
   const data = useSelector((state) => state.cart.listCart); // sử dụng tạm product data
   // const testData = data.filter((e) => e.category === "watch");
+
   useEffect(() => {
     localStorage.setItem("listCart", JSON.stringify(data));
   }, [data]);

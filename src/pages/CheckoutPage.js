@@ -6,6 +6,7 @@ import formatPrice from "../components/Layout/formatPrice";
 
 const CheckoutPage = () => {
   const listCart = useSelector((state) => state.cart.listCart);
+
   const total = listCart.reduce(
     (sum, item) => sum + item.product.price * item.quantity,
     0

@@ -28,8 +28,15 @@ const LoginPage = () => {
       dispatch(authActions.logIn());
       dispatch(authActions.loadUser(user));
       dispatch(authActions.setUser(user.fullName));
-
-      localStorage.setItem("currentUser", JSON.stringify(user));
+      dispatch(authActions.setShow());
+      localStorage.removeItem("userArr");
+      const newUser = {
+        fullName: user.fullName,
+        email: user.email,
+        code: "OPT Code",
+        show: true,
+      };
+      localStorage.setItem("currentUser", JSON.stringify(newUser));
       navigate("/");
 
       // Redirect to another page or update the state

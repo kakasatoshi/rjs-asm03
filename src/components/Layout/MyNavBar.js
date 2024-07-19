@@ -7,14 +7,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store";
 
 const MyNavbar = () => {
-  const login = useSelector((state) => state.auth.logIn);
-  const user = useSelector((state) => state.auth.user) || "";
+  const data = JSON.parse(localStorage.getItem("currentUser"));
+
+  const dataLogIn = useSelector((state) => state.auth.logIn);
+  const login = data.show ? data.show : dataLogIn;
+  const dataUser = useSelector((state) => state.auth.user);
+  const user = data.fullName ? data.fullName : dataUser;
   const dispatch = useDispatch();
 
   const onClickHandle = () => {
     dispatch(authActions.logOut());
     dispatch(authActions.setUser(""));
-    localStorage.clear();
+    localStorage.removeItem("currentUser");
   };
 
   return (
